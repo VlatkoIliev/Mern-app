@@ -1,0 +1,440 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header */
+
+.todo-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  width: 100%;
+  background-color: rgb(27, 8, 27);
+  color: white;
+  z-index: 1;
+}
+
+.header-nav {
+  max-width: 200px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.header-list {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.header-link {
+  display: block;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+}
+
+.btn-logout {
+  height: 100%;
+  padding: 0 5px;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+
+.logo {
+  font-size: 32px;
+}
+
+/* Home/Not found page*/
+
+.home-section {
+  padding-top: 150px;
+}
+.greeting-title,
+.not-found-text {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.not-found-text {
+  margin-bottom: 20px;
+}
+
+.greeting-title {
+  font-size: 48px;
+}
+
+/* Dashboard */
+
+.todo-container {
+  padding-top: 100px;
+  min-height: 100vh;
+}
+
+.todo-section {
+  display: flex;
+}
+
+.form-container,
+.todo-card {
+  border: 2px solid rgb(204, 199, 199);
+  border-radius: 12px;
+  width: 500px;
+  height: 300px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.todo-card {
+  margin-top: 150px;
+}
+
+.todo-form {
+  display: flex;
+  margin-top: 20px;
+  height: 30px;
+  width: 100%;
+}
+
+.input {
+  width: 350px;
+  height: 100%;
+  border: 1px solid rgb(179, 176, 176);
+  border-right: none;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.input:focus,
+.search-field:focus {
+  outline: none;
+}
+
+.form-btn {
+  height: 100%;
+  padding: 0 16px;
+  background-color: royalblue;
+  color: white;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.form-btn:hover {
+  background-color: rgb(15, 15, 150);
+}
+
+.search-container {
+  width: 50%;
+  position: relative;
+}
+
+.search-field {
+  width: 100%;
+  padding: 7px;
+  border: 1px solid rgb(179, 176, 176);
+  border-radius: 5px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+}
+
+.search-select {
+  padding: 2px 5px;
+  border: 1px solid rgb(179, 176, 176);
+  border-radius: 5px;
+}
+
+/* Sidebar */
+
+.todo-sidebar {
+  width: 30%;
+  min-height: 100vh;
+  padding: 8px;
+  overflow-y: scroll;
+  border: 1px solid lightgrey;
+}
+
+/* Sidebar list*/
+
+.todo-list {
+  list-style-type: none;
+}
+
+.todo-item {
+  display: flex;
+  padding: 10px;
+  border: 1px solid rgb(204, 199, 199);
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.todo-title {
+  width: 50%;
+  font-weight: 600;
+}
+
+.btn-delete-item {
+  padding: 0 8px;
+  margin-right: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(240, 193, 76);
+  color: white;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  max-height: 40px;
+}
+
+.todo-item-statusbar {
+  display: flex;
+  align-items: center;
+}
+
+.todo-checkbox {
+  margin-left: 8px;
+}
+
+.todo-item:hover {
+  background-color: rgb(215, 223, 220);
+}
+
+.todo-details {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.todo-title,
+.todo-status {
+  padding: 5px;
+}
+
+.todo-status {
+  margin-bottom: 20px;
+}
+
+.todo-created {
+  margin-top: 20px;
+}
+
+.btn-back {
+  display: block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: royalblue;
+  color: white;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.btn-back:hover {
+  transform: scale(1.1);
+}
+
+/* Register / Login forms */
+
+.user-form {
+  border: 1px solid black;
+  margin: 150px auto;
+  max-width: 480px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.input-container,
+.input-label {
+  margin-bottom: 10px;
+}
+
+.input-label {
+  display: block;
+}
+
+.input-fields {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.input-error {
+  color: red;
+}
+
+.password-container {
+  position: relative;
+}
+
+.icon-eye-open {
+  position: absolute;
+  top: 55px;
+  right: 20px;
+}
+
+.input-fields:focus {
+  outline: none;
+}
+
+.btn-submit {
+  max-height: 50px;
+  height: 50px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 30px;
+  background-color: royalblue;
+  color: white;
+  text-transform: uppercase;
+  transition: 0.2s all ease-in-out;
+  cursor: pointer;
+}
+
+.signup-text {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.signup-link {
+  margin-left: 10px;
+  text-decoration: none;
+  color: blue;
+  font-weight: 600;
+}
+
+.btn-submit:hover {
+  background-color: rgba(65, 105, 225, 0.7);
+}
+
+/* Search / filter  */
+
+.search-filter {
+  margin-top: 40px;
+}
+
+.search-select {
+  margin-top: 20px;
+}
+
+/* Error page */
+
+.main-error-page {
+  padding-top: 200px;
+}
+
+/* Spinner */
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+}
+.lds-dual-ring:after {
+  content: ' ';
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+
+@media screen and (max-width: 576px) {
+  .form-container {
+    text-align: center;
+  }
+  .todo-form {
+    height: 80px;
+    flex-direction: column;
+  }
+
+  .input {
+    width: 100%;
+    border-right: 1px solid rgb(179, 176, 176);
+    border-radius: 5px;
+    margin-bottom: 8px;
+  }
+
+  .form-btn {
+    width: 100%;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .todo-section {
+    padding-left: 50px;
+    padding-right: 50px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-container {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .form-btn {
+    padding: 0 8px;
+  }
+
+  .todo-sidebar {
+    width: 100%;
+    padding: 0;
+    overflow-y: hidden;
+    margin-top: 50px;
+    border: none;
+  }
+}
+
+@media (min-width: 801px) and (max-width: 1220px) {
+  .todo-item {
+    flex-direction: column;
+    align-items: center;
+  }
+  .btn-delete-item {
+    padding: 5px 0;
+    width: 50%;
+  }
+  .todo-title {
+    width: 100%;
+    text-align: center;
+  }
+}
