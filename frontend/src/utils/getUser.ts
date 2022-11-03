@@ -1,6 +1,3 @@
-// get user from localStorage
-// user = { _id, email, token}
-
 export const getUser = () => {
   const user = localStorage.getItem('user');
   if (!user) {
@@ -10,4 +7,15 @@ export const getUser = () => {
     const { token } = userObj;
     return token;
   }
+};
+
+export const getUserId = () => {
+  const user = localStorage.getItem('user');
+  let userObj;
+  if (!user) {
+    return;
+  }
+  userObj = JSON.parse(user);
+  const userId = userObj._id;
+  return userId;
 };

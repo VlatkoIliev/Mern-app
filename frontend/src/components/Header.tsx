@@ -1,4 +1,6 @@
-import { Link, useNavigate } from 'react-router-dom';
+// Libraries
+
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();

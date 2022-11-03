@@ -1,6 +1,7 @@
 import { GoSearch } from 'react-icons/go';
+import { FilterProps } from '../interface/filterProps';
 
-const Filter = ({ handleFilter, filterBy, handleTerm, term }) => {
+const Filter = ({ value, handleFilter, handleTerm }: FilterProps) => {
   return (
     <div className='search-filter'>
       <div className='search-container'>
@@ -8,20 +9,14 @@ const Filter = ({ handleFilter, filterBy, handleTerm, term }) => {
           className='search-field'
           type='text'
           placeholder='Search by term...'
-          value={term}
           onChange={handleTerm}
         />
         <GoSearch className='search-icon' />
       </div>
-      <select
-        value={filterBy}
-        onChange={handleFilter}
-        className='search-select'
-      >
-        <option></option>
-        <option>All todos</option>
-        <option>Completed todos</option>
-        <option>Pending todos</option>
+      <select value={value} onChange={handleFilter} className='search-select'>
+        <option value='All todos'>All todos</option>
+        <option value='Completed todos'>Completed todos</option>
+        <option value='Pending todos'>Pending todos</option>
       </select>
     </div>
   );

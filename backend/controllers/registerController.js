@@ -1,25 +1,28 @@
 const User = require('../model/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler');
 
 // POST api/register
 // register new user
 // access public
 
-const registerUser = async (req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
   // Get the user details from the request body
   const { firstName, lastName, email, password } = req.body;
 
   // Check if something is not in the req body
   if (!firstName || !lastName || !email || !password) {
-    res.status(400).json({ message: 'All fields are required' });
+    res.status(400);
+    throw new Error('All field are required');
   }
 
   // Check if user with that email exists in the DB
   const match = await User.findOne({ email });
 
   if (match) {
-    res.status(409).json({ message: 'User already exists' });
+    res.status(409);
+    throw new Error('Email already exists');
   }
 
   // Encrypt password
@@ -43,9 +46,10 @@ const registerUser = async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(400).json({ message: 'Invalid user data' });
+    res.status(400);
+    throw new Error('Invalid user data');
   }
-};
+});
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '24h' });

@@ -4,7 +4,7 @@ const InputField = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <div>
-      <label htmlFor={props.id || props.name} className='input-label'>
+      <label htmlFor={props.name} className='input-label'>
         {label}
       </label>
       <input {...field} {...props} />

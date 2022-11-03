@@ -1,12 +1,17 @@
+// Libraries
+
 import { useNavigate } from 'react-router-dom';
 
-const Todo = ({ todo, id, onDeleteTodo, onUpdateTodo }) => {
+// interface
+import { TodoProps } from '../interface/todoProps';
+
+const Todo = ({ todo, id, onDeleteTodo, onUpdateTodo }: TodoProps) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate(`/${id}`);
   };
   return (
-    <li key={id} className='todo-item' onClick={handleNavigate}>
+    <li className='todo-item' onClick={handleNavigate}>
       <p className='todo-title'>{todo.title}</p>
       <button
         className='btn-delete-item'

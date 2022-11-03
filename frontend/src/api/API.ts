@@ -1,11 +1,19 @@
+// Libraries
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getUser } from '../utils/getUser';
 import axios from 'axios';
+
+// Components
+import { ITodo } from '../interface/todoProps';
+
+// utils
+import { getUser } from '../utils/getUser';
+
+const token = getUser();
 
 const instance = axios.create({
   baseURL: 'http://localhost:5000/api/todos',
   headers: {
-    Authorization: `Bearer ${getUser()}`,
+    Authorization: `Bearer ${token}`,
   },
 });
 
@@ -24,43 +32,43 @@ export const useFetchTodos = () => {
 
 // Get todo by id
 
-const fetchTodo = async ({ queryKey }) => {
-  const id = queryKey[1];
+const fetchTodo = async ({ queryKey }: { queryKey: string[] }) => {
+  const id: string = queryKey[1];
   const response = await instance.get(`/${id}`);
   return response;
 };
 
-export const useFetchTodo = (id) => {
+export const useFetchTodo = (id: any) => {
   return useQuery(['todo', id], fetchTodo);
 };
 
 // Add new todo
 
-const addTodo = async (newTodo) => {
-  const response = await instance.post('/', newTodo);
+const addTodo = async (newTodo: ITodo) => {
+  const todo: ITodo = {
+    _id: newTodo._id,
+    user: newTodo.user,
+    title: newTodo.title,
+    isDone: newTodo.isDone,
+  };
+  const response = await instance.post('/', todo);
   return response;
 };
 
 // Invalidation is used to refetch the todos after the post
-// Optimistic update - not triggering the fetching after post
+
 export const useAddNewTodo = () => {
   const queryClient = useQueryClient();
   return useMutation(addTodo, {
-    onSuccess: (data) => {
-      // queryClient.invalidateQueries(['todos']);
-      queryClient.setQueryData(['todos'], (oldQueryData) => {
-        return {
-          ...oldQueryData,
-          data: [...oldQueryData.data, data.data],
-        };
-      });
+    onSuccess: () => {
+      queryClient.invalidateQueries(['todos']);
     },
   });
 };
 
 // Delete
 
-const deleteTodo = async (id) => {
+const deleteTodo = async (id: string) => {
   const response = await instance.delete(`/${id}`);
   return response;
 };
@@ -76,7 +84,13 @@ export const useDeleteTodo = () => {
 
 // Update
 
-const updateTodo = async (todo) => {
+const updateTodo = async (newTodo: ITodo) => {
+  const todo: ITodo = {
+    _id: newTodo._id,
+    user: newTodo.user,
+    title: newTodo.title,
+    isDone: newTodo.isDone,
+  };
   const response = await instance.put(`/${todo._id}`, todo);
   return response;
 };

@@ -6,19 +6,21 @@ import InputField from '../components/FormInputs/InputField';
 import Spinner from '../components/Spinner';
 
 // Libraries
+// Libraries
 import { useNavigate } from 'react-router-dom';
-import { Formik, Form } from 'formik';
+import { Formik, Form, FormikValues } from 'formik';
 import axios from 'axios';
 
 // Validation schema
 import SIGN_UP_SCHEMA from '../validation/registrationSchema';
 
-// Icons
+// Assets
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 const SignUpForm = () => {
-  const [isEyeOpenPass, setIsEyeOpenPass] = useState(false);
-  const [isEyeOpenConPass, setIsEyeOpenConPass] = useState(false);
+  const [isEyeOpenPass, setIsEyeOpenPass] = useState<boolean>(false);
+  const [isEyeOpenConPass, setIsEyeOpenConPass] = useState<boolean>(false);
+  const [emailExists, setEmailExists] = useState<string>('');
 
   const handleIconPass = () => {
     setIsEyeOpenPass(!isEyeOpenPass);
@@ -30,9 +32,9 @@ const SignUpForm = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values: FormikValues) => {
     const { firstName, lastName, email, password, confirmPassword } = values;
-    const body = {
+    const body: FormikValues = {
       firstName,
       lastName,
       email,
@@ -47,9 +49,16 @@ const SignUpForm = () => {
       if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
+
       navigate('/login');
-    } catch (error) {
-      console.log(error.message);
+    } catch (error: any) {
+      if (error.response) {
+        let message = error.response.data.message;
+        setEmailExists(message);
+        setTimeout(() => {
+          setEmailExists('');
+        }, 3000);
+      }
     }
   };
 
@@ -64,7 +73,7 @@ const SignUpForm = () => {
         confirmPassword: '',
       }}
       validationSchema={SIGN_UP_SCHEMA}
-      onSubmit={async (values) => {
+      onSubmit={async (values: FormikValues) => {
         await handleSubmit(values);
       }}
     >
@@ -101,6 +110,7 @@ const SignUpForm = () => {
                 placeholder='joe@gmail.com'
                 className='input-fields'
               />
+              {emailExists && <p>Email already exists</p>}
             </div>
             <div className='input-container password-container'>
               <InputField

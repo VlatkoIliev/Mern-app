@@ -1,24 +1,23 @@
-// Hooks
 import { useState } from 'react';
 
 // Components
-import InputField from '../components/FormInputs/InputField';
 import Spinner from '../components/Spinner';
+import FormInput from '../components/FormInputs/FormInput';
 
 // Libraries
 import { Link, useNavigate } from 'react-router-dom';
-import { Formik, Form } from 'formik';
+import { Formik, Form, FormikValues, Field } from 'formik';
 import axios from 'axios';
 
 // Validation Schema
 import LOGIN_SCHEMA from '../validation/loginSchema';
 
-// Icons
+// Assets
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 const LoginForm = () => {
-  const [isEyeOpen, setIsEyeOpen] = useState(false);
-  const [incorrectPassword, setIncorrectPassword] = useState(null);
+  const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
+  const [incorrectPassword, setIncorrectPassword] = useState<string>('');
   const navigate = useNavigate();
 
   const handleIcon = () => {
@@ -28,10 +27,10 @@ const LoginForm = () => {
   // response returns user details(_id, email, and token)
   // store the access token in storage
 
-  const handleLogin = async (values) => {
+  const handleLogin = async (values: FormikValues) => {
     const { email, password } = values;
 
-    const body = {
+    const body: FormikValues = {
       email,
       password,
     };
@@ -46,13 +45,12 @@ const LoginForm = () => {
       }
 
       navigate('/dashboard');
-    } catch (error) {
-      // set error (incorrect password) in state
+    } catch (error: any) {
       if (error.response) {
         let message = error.response.data.message;
         setIncorrectPassword(message);
         setTimeout(() => {
-          setIncorrectPassword(null);
+          setIncorrectPassword('');
         }, 3000);
       }
     }
@@ -66,7 +64,7 @@ const LoginForm = () => {
         password: '',
       }}
       validationSchema={LOGIN_SCHEMA}
-      onSubmit={async (values) => {
+      onSubmit={async (values: FormikValues) => {
         await handleLogin(values);
       }}
     >
@@ -77,21 +75,22 @@ const LoginForm = () => {
           </header>
           <Form className='user-form'>
             <div className='input-container'>
-              <InputField
+              <Field
                 label='Email'
                 name='email'
                 type='email'
                 placeholder='joe@gmail.com'
-                className='input-fields'
+                component={FormInput}
               />
             </div>
+
             <div className='input-container password-container'>
-              <InputField
+              <Field
                 label='Password'
                 name='password'
                 type={isEyeOpen ? 'text' : 'password'}
                 placeholder='********'
-                className='input-fields'
+                component={FormInput}
               />
               {isEyeOpen ? (
                 <AiOutlineEye className='icon-eye-open' onClick={handleIcon} />

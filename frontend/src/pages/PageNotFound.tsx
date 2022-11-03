@@ -1,17 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom';
-
-// Header and back to dashboard
+import { useNavigate } from 'react-router-dom';
 
 const PageNotFound = () => {
   const navigate = useNavigate();
-  const handleLogout = async () => {
-    try {
-      localStorage.removeItem('user');
-      navigate('/home');
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleClick = () => {
     navigate('/dashboard');

@@ -22,11 +22,6 @@ app.use('/api/todos', require('./routes/todoRoutes'));
 app.use('/api/register', require('./routes/userRoutes'));
 app.use('/api/login', require('./controllers/authController'));
 app.use(errorHandler);
-app.use(function (req, res, next) {
-  res.status(404);
-  res.json({ status: 404, title: 'Not Found', msg: 'Route not found' });
-  next();
-});
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: http://localhost:${PORT}`);

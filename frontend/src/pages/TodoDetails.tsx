@@ -1,6 +1,6 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../components/Spinner';
-import { useFetchTodo } from '../api/hooks';
+import { useFetchTodo } from '../api/API';
 import { formatter } from '../utils/formatter';
 
 // Get the id from the url params
@@ -9,13 +9,13 @@ import { formatter } from '../utils/formatter';
 
 const TodoDetails = () => {
   const { id } = useParams();
-  const { isLoading, isError, error, data } = useFetchTodo(id);
+  const { isLoading, isError, data } = useFetchTodo(id);
 
   const navigate = useNavigate();
 
   if (isLoading) return <Spinner />;
 
-  if (isError) return <h3>{error.message}</h3>;
+  if (isError) return <h3>Something went wrong...</h3>;
 
   const { title, isDone, createdAt, updatedAt } = data?.data;
 
@@ -26,7 +26,7 @@ const TodoDetails = () => {
       </header>
       <div className='todo-card'>
         <h3 className='todo-details'>Todo details</h3>
-        <p className='todo-title'>
+        <p>
           <b>Title:</b> {title ? title : null}
         </p>
         <p className='todo-status'>

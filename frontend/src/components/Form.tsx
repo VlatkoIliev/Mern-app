@@ -1,5 +1,7 @@
-const Form = ({ title, setTitle, onAddTodo }) => {
-  const handleSubmit = (e) => {
+import { FormProps } from '../interface/formProps';
+
+const Form = ({ title, setTitle, onAddTodo }: FormProps) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onAddTodo();
     setTitle('');
@@ -14,7 +16,7 @@ const Form = ({ title, setTitle, onAddTodo }) => {
       />
 
       <button type='submit' className='form-btn'>
-        Add Todo
+        Go
       </button>
     </form>
   );

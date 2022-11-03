@@ -1,11 +1,12 @@
-// Hooks
 import { useState, useCallback } from 'react';
+
+// Hooks
 import {
   useFetchTodos,
   useAddNewTodo,
   useDeleteTodo,
   useUpdateTodo,
-} from '../api/hooks';
+} from '../api/API';
 
 // Components
 import Spinner from '../components/Spinner';
@@ -14,14 +15,18 @@ import Header from '../components/Header';
 import Filter from '../components/Filter';
 import Form from '../components/Form';
 
+// interfaces
+import { ITodo } from '../interface/todoProps';
+
 // utils
+import { getUserId } from '../utils/getUser';
 import debounce from 'lodash.debounce';
 
 const Dashboard = () => {
-  const { isLoading, isError, error, data } = useFetchTodos();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterBy, setFilterBy] = useState('All todos');
-  const [title, setTitle] = useState('');
+  const { isLoading, isError, data } = useFetchTodos();
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [filterBy, setFilterBy] = useState<string>('All todos');
+  const [title, setTitle] = useState<string>('');
 
   // Mutations with custom hooks
   const { mutate: addTodo } = useAddNewTodo();
@@ -29,20 +34,31 @@ const Dashboard = () => {
   const { mutate: updateTodo } = useUpdateTodo();
 
   const handleAddTodo = () => {
-    addTodo({ title, isDone: false });
+    const userId = getUserId();
+
+    const item = {
+      _id: '',
+      user: userId,
+      title,
+      isDone: false,
+    };
+    addTodo(item);
   };
 
-  const handleDeleteTodo = (id) => {
+  const handleDeleteTodo = (id: string) => {
     deleteTodo(id);
   };
 
-  const handleUpdateTodoStatus = (todo) => {
-    updateTodo({ ...todo, isDone: !todo.isDone });
+  const handleUpdateTodoStatus = (todo: ITodo) => {
+    const item = {
+      ...todo,
+      isDone: !todo.isDone,
+    };
+    updateTodo(item);
   };
 
   // Search
-
-  const handleSearchTerm = (e) => {
+  const handleSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
@@ -51,17 +67,17 @@ const Dashboard = () => {
   const filteredListByTerm = () => {
     if (searchTerm === '') return data?.data;
 
-    return data?.data.filter((todo) =>
-      todo.title.toLowerCase().includes(searchTerm.toLowerCase())
+    return data?.data.filter((todo: ITodo) =>
+      todo.title.toLowerCase().includes(searchTerm?.toLowerCase())
     );
   };
 
   // Filter
-  const handleFilter = (e) => {
+  const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilterBy(e.target.value);
   };
 
-  const filterListByStatus = (todos) => {
+  const filterListByStatus = (todos: ITodo[]) => {
     if (filterBy === 'All todos') {
       return todos;
     } else if (filterBy === 'Completed todos') {
@@ -72,10 +88,11 @@ const Dashboard = () => {
   };
 
   if (isLoading) return <Spinner />;
-  if (isError) return <p>Error: {error.message}</p>;
+  if (isError) return <p>Error</p>;
 
   const filteredBySearchTerm = filteredListByTerm();
-  const filteredByTermAndStatus = filterListByStatus(filteredBySearchTerm);
+  const filteredByTermAndStatus: ITodo[] | undefined =
+    filterListByStatus(filteredBySearchTerm);
 
   return (
     <>
@@ -83,29 +100,24 @@ const Dashboard = () => {
       <div className='todo-container'>
         <section className='todo-section'>
           <div className='form-container'>
-            <h2>Todo list fullstack</h2>
             <Form title={title} setTitle={setTitle} onAddTodo={handleAddTodo} />
-
             <Filter
+              value={filterBy}
               handleFilter={handleFilter}
-              filterBy={filterBy}
               handleTerm={handleSearchTerm}
-              term={searchTerm}
             />
           </div>
 
           <aside className='todo-sidebar'>
             <ul className='todo-list'>
               {data?.data &&
-                filteredByTermAndStatus.map((todo) => {
-                  const { _id } = todo;
-                  const id = _id;
+                filteredByTermAndStatus?.map((todo: ITodo) => {
                   return (
                     <Todo
-                      key={id}
+                      key={todo._id}
                       todo={todo}
-                      id={id}
-                      onDeleteTodo={() => handleDeleteTodo(id)}
+                      id={todo._id}
+                      onDeleteTodo={() => handleDeleteTodo(todo._id)}
                       onUpdateTodo={handleUpdateTodoStatus}
                     />
                   );

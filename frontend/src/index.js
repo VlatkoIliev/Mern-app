@@ -30,19 +30,17 @@ const queryClient = new QueryClient({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <Routes>
-          <Route path='/' element={<App />} />
-          <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/register' element={<SignUpForm />} />
-          <Route path='/:id' element={<TodoDetails />} />
-          <Route path='/login' element={<LoginForm />} />
-          <Route path='*' element={<PageNotFound />} />
-        </Routes>
-      </Router>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  </React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <Router>
+      <Routes>
+        <Route path='/' element={<App />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/register' element={<SignUpForm />} />
+        <Route path='/:id' element={<TodoDetails />} />
+        <Route path='/login' element={<LoginForm />} />
+        <Route path='*' element={<PageNotFound />} />
+      </Routes>
+    </Router>
+    <ReactQueryDevtools initialIsOpen={false} />
+  </QueryClientProvider>
 );

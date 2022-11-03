@@ -103,17 +103,21 @@
 .todo-form {
   display: flex;
   margin-top: 20px;
-  height: 30px;
+  height: 35px;
   width: 100%;
 }
 
 .input {
   width: 350px;
   height: 100%;
-  border: 1px solid rgb(179, 176, 176);
-  border-right: none;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
+  -webkit-box-shadow: 0 0 5px #666;
+  -moz-box-shadow: 0 0 5px #666;
+  box-shadow: 0 0 5px #666;
+
+  border: none;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  text-indent: 20px;
 }
 
 .input:focus,
@@ -122,13 +126,17 @@
 }
 
 .form-btn {
+  width: 100px;
   height: 100%;
-  padding: 0 16px;
+  padding: 0 25px;
   background-color: royalblue;
   color: white;
   border: none;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  -webkit-box-shadow: 0 0 5px #666;
+  -moz-box-shadow: 0 0 5px #666;
+  box-shadow: 0 0 5px #666;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -140,13 +148,18 @@
 .search-container {
   width: 50%;
   position: relative;
+  margin-bottom: 25px;
 }
 
 .search-field {
   width: 100%;
   padding: 7px;
-  border: 1px solid rgb(179, 176, 176);
-  border-radius: 5px;
+  border: none;
+  -webkit-box-shadow: 0 0 5px #666;
+  -moz-box-shadow: 0 0 5px #666;
+  box-shadow: 0 0 5px #666;
+  border-radius: 20px;
+  text-indent: 15px;
 }
 
 .search-icon {
@@ -156,16 +169,36 @@
 }
 
 .search-select {
-  padding: 2px 5px;
-  border: 1px solid rgb(179, 176, 176);
-  border-radius: 5px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 30px;
+  border: none;
+  -webkit-box-shadow: 0 0 5px #666;
+  -moz-box-shadow: 0 0 5px #666;
+  box-shadow: 0 0 5px #666;
+  border-radius: 20px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: 0.65em auto, 100%;
+}
+
+.search-select::-ms-expand {
+  display: none;
+}
+.search-select:focus {
+  outline: none;
 }
 
 /* Sidebar */
 
 .todo-sidebar {
   width: 30%;
-  min-height: 100vh;
+  margin-right: 8px;
+  height: calc(100vh - 200px);
   padding: 8px;
   overflow-y: scroll;
   border: 1px solid lightgrey;
@@ -179,6 +212,7 @@
 
 .todo-item {
   display: flex;
+  align-items: center;
   padding: 10px;
   border: 1px solid rgb(204, 199, 199);
   border-radius: 12px;
@@ -188,15 +222,15 @@
 
 .todo-title {
   width: 50%;
-  font-weight: 600;
 }
 
 .btn-delete-item {
-  padding: 0 8px;
+  height: 30px;
+  padding: 0 10px;
   margin-right: 20px;
   border: none;
   border-radius: 5px;
-  background-color: rgb(240, 193, 76);
+  background-color: rgb(19, 215, 237);
   color: white;
   font-size: 12px;
   text-transform: uppercase;
@@ -222,8 +256,7 @@
   margin-bottom: 20px;
 }
 
-.todo-title,
-.todo-status {
+.todo-title {
   padding: 5px;
 }
 
@@ -382,15 +415,14 @@
   .input {
     width: 100%;
     border-right: 1px solid rgb(179, 176, 176);
-    border-radius: 5px;
+    border-radius: 20px;
     margin-bottom: 8px;
   }
 
   .form-btn {
     width: 100%;
-    padding: 10px;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
   }
 
   .search-container {
