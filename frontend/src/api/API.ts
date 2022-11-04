@@ -1,20 +1,10 @@
 // Libraries
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
+
+import { instance } from './axiosInstance';
 
 // Components
 import { ITodo } from '../interface/todoProps';
-
-const token = localStorage.getItem('token')
-  ? localStorage.getItem('token')
-  : null;
-
-const instance = axios.create({
-  baseURL: 'http://localhost:5000/api/todos',
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-});
 
 // CRUD api
 
