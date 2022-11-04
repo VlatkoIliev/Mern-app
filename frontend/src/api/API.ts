@@ -5,10 +5,9 @@ import axios from 'axios';
 // Components
 import { ITodo } from '../interface/todoProps';
 
-// utils
-import { getUser } from '../utils/getUser';
-
-const token = getUser();
+const token = localStorage.getItem('token')
+  ? localStorage.getItem('token')
+  : null;
 
 const instance = axios.create({
   baseURL: 'http://localhost:5000/api/todos',

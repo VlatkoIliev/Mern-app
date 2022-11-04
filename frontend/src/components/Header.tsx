@@ -9,6 +9,7 @@ const Header = () => {
   const handleLogout = () => {
     try {
       localStorage.removeItem('user');
+      localStorage.removeItem('token');
       navigate('/');
     } catch (error) {
       console.log(error);

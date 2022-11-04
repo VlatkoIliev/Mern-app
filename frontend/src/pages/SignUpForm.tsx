@@ -47,6 +47,8 @@ const SignUpForm = () => {
         body
       );
       if (response.data) {
+        const { token } = response.data;
+        localStorage.setItem('token', token);
         localStorage.setItem('user', JSON.stringify(response.data));
       }
 
