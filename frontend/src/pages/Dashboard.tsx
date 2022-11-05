@@ -87,7 +87,13 @@ const Dashboard = () => {
     }
   };
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <div className='loader-spinner'>
+        {' '}
+        <Spinner />
+      </div>
+    );
   if (isError) return <p>Error</p>;
 
   const filteredBySearchTerm = filteredListByTerm();

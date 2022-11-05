@@ -13,7 +13,13 @@ const TodoDetails = () => {
 
   const navigate = useNavigate();
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <div className='loader-spinner'>
+        {' '}
+        <Spinner />
+      </div>
+    );
 
   if (isError) return <h3>Something went wrong...</h3>;
 
